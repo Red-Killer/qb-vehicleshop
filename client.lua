@@ -506,16 +506,16 @@ RegisterNetEvent('qb-vehicleshop:client:vehCategories', function(data)
         if type(QBCore.Shared.Vehicles[k]["shop"]) == 'table' then
             for _, shop in pairs(QBCore.Shared.Vehicles[k]["shop"]) do
                 if shop == insideShop and (not Config.FilterByMake or QBCore.Shared.Vehicles[k]["brand"] == data.make) then
-                    catmenu[v.category] = v.category
+                    catmenu[v.categoryLabel] = v.category
                     if firstvalue == nil then
-                        firstvalue = v.category
+                        firstvalue = v.categoryLabel
                     end
                 end
             end
         elseif QBCore.Shared.Vehicles[k]["shop"] == insideShop and (not Config.FilterByMake or QBCore.Shared.Vehicles[k]["brand"] == data.make) then
-            catmenu[v.category] = v.category
+            catmenu[v.categoryLabel] = v.category
             if firstvalue == nil then
-                firstvalue = v.category
+                firstvalue = v.categoryLabel
             end
         end
     end
@@ -525,12 +525,12 @@ RegisterNetEvent('qb-vehicleshop:client:vehCategories', function(data)
     end
     for k, v in pairs(catmenu) do
         categoryMenu[#categoryMenu + 1] = {
-            header = v,
+            header = k,
             icon = "fa-solid fa-circle",
             params = {
                 event = 'qb-vehicleshop:client:openVehCats',
                 args = {
-                    catName = k,
+                    catName = v,
                 }
             }
         }
